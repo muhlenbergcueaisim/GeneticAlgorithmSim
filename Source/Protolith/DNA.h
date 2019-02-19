@@ -41,5 +41,4 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		UDNA* Replicate(UDNA* origDNA);
 
-
 };
