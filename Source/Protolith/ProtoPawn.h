@@ -34,6 +34,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UDNA* DNA;
 
+	// this is the pawn's fintess score
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float fitness;
+
+
 	/*
 	*	SCENE COMPONENTS
 	*/

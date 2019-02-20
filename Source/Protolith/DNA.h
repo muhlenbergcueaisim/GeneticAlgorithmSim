@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Gene.h"
 #include "DNA.generated.h"
+#include <cstdlib>
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class PROTOLITH_API UDNA : public UActorComponent
@@ -27,7 +28,7 @@ public:
 
 	// an array of our genes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		TArray<UGene*> Genes;
+		TArray<int> Genes;
 
 	// an individual gene struct
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
@@ -41,4 +42,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		UDNA* Replicate(UDNA* origDNA);
 
+	// mutates the DNA
+	UFUNCTION(BlueprintCallable)
+		UDNA* Mutate(UNDA* DNA, int chance);
+
+	// returns two children of the two UDNA
+	UFUNCTION(BlueprintCallable)
+		TArray<UDNA*> Cross(UDNA* parent0, UDNA* parent1);
 };
