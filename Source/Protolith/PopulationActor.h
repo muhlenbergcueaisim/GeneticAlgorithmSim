@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "ProtoPawn.h"
 #include "PopulationActor.generated.h"
+#include <cstdlib>
+#include "DNA.h"
 
 UCLASS()
 class PROTOLITH_API APopulationActor : public AActor
@@ -40,6 +42,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith", meta = (UIMin = "0.0", UIMax = "1.0"))
 		float crossoverChance = 0.2;
 
+	// the amount of the population to keep at the end of each generation
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.1", UIMax = "0.5"))
+		float recuringPopulation = 0.2;
+
+	// the probability of mutation happening
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.0", UIMax = "1.0"))
+		float mutateChance = 0.2;
+
+	// a flag for the user to stop making new generations
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool stop = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		AProtoPawn* pawnToSpawn;
 
@@ -60,6 +74,18 @@ public:
 	// evaluates the fitness of each member of the population
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		void EvaluateFitness(TArray<AProtoPawn*> Pop);
+	
 
+	// removes the weakest pawns
+	UFUNCTION(BlueprintCallable)
+		void eliminate();
+
+	// refills the population with a new generation
+	UFUNCTION(BlueprintCallable)
+		void reproduce();
+
+	// handles the structure of the genetic algorithm
+	UFUNCTION(BlueprintCallable)
+		void geneticAlgorithm();
 };
 

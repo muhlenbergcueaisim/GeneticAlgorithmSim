@@ -53,3 +53,51 @@ void APopulationActor::EvaluateFitness(TArray<AProtoPawn*> Pop)
 	UE_LOG(LogTemp, Warning, TEXT("evaluating fitness..."));
 }
 
+// removes the weakest pawns
+void APopulationActor::eliminate()
+{
+	TArray<AProtoPawn*> remainingPopulation = TArray<AProtoPawn*>();
+	int newPopulationSize = initialSize * recuringPopulation;
+	for (int i = 0; i < newPopulationSize; i++) {
+		remainingPopulation.emplace(Population[i]);
+	}
+	Population = remainingPopulation;
+	curentSize = newPopulationSize;
+}
+
+// refills the population with a new generation
+void APopulationActor::reproduce()
+{
+	int parent0, parent1;
+	TArray<UDNA*> newDNA = TArray<UDNA*>
+	TArray<AProtoPawn*> nextGeneration = TArray<AProtoPawn*>();
+	AProtoPawn* newPawn;
+
+	while (curentSize < initialSize) {
+		parent0 = rand() % Population.Num();
+		parent1 = rand() % Population.Num();
+		newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
+
+		newPawn = AProtoPawn::AProtoPawn();
+		newPawn->DNA = UDNA::Mutate(newDNA[0], mutateChance);
+		curentSize++;
+
+		if (curentSize < initialSize) {
+			newPawn = AProtoPawn::AProtoPawn();
+			newPawn->DNA = UDNA::Mutate(newDNA[1], mutateChance);
+			curentSize++;
+		}
+	}
+}
+
+// handles the structure of the genetic algorithm
+void APopulationActor::geneticAlgorithm()
+{
+	while (!stop) {
+		//need a way to ensure that the fitness of each pawn has been calculated
+		Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
+		eliminate();
+		reproduce();
+	}
+}
+
