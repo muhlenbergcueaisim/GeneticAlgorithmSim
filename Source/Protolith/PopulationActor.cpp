@@ -33,7 +33,7 @@ TArray<AProtoPawn*> APopulationActor::PopGenesis(TArray<FTransform> spawnTransfo
 
 	UWorld* world = GetWorld();
 
-	for (int i = 0; i <= initialSize-20; i++)
+	for (int i = 0; i <= 4; i++)
 	{
 		//pawnType = PawnTypes[0];
 		// get a reference to the world
