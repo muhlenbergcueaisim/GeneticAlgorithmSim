@@ -27,17 +27,19 @@ void APopulationActor::Tick(float DeltaTime)
 }
 
 // initializes the population and returns an array of pawn actors
-TArray<AProtoPawn*> APopulationActor::PopGenesis(FTransform spawnTransform)
+TArray<AProtoPawn*> APopulationActor::PopGenesis(TArray<FTransform> spawnTransform)
 {
 	TArray <AProtoPawn*> newPopulation = TArray<AProtoPawn*>();
-	
+
+	UWorld* world = GetWorld();
+
 	for (int i = 0; i <= initialSize-20; i++)
 	{
 		//pawnType = PawnTypes[0];
 		// get a reference to the world
-		UWorld* world = GetWorld();
 
-		AProtoPawn* ReturnPawn = world->SpawnActor<AProtoPawn>(PawnType, popOrigin);
+		int randSpawn = rand() % 4;
+		AProtoPawn* ReturnPawn = world->SpawnActor<AProtoPawn>(PawnType, spawnTransform[randSpawn]);
 
 		// increment current size
 		currentSize++;

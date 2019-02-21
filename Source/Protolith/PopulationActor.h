@@ -67,7 +67,7 @@ public:
 
 	// initializes the population
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
-		TArray<AProtoPawn*> PopGenesis(FTransform spawnTransform);
+		TArray<AProtoPawn*> PopGenesis(TArray<FTransform> spawnTransform);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		TSubclassOf<AProtoPawn> PawnType;
