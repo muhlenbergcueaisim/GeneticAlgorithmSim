@@ -80,14 +80,17 @@ void APopulationActor::reproduce()
 
 		newPawn = AProtoPawn::AProtoPawn();
 		newPawn->DNA = UDNA::Mutate(newDNA[0], mutateChance);
+		nextGeneration.emplace(newPawn);
 		curentSize++;
 
 		if (curentSize < initialSize) {
 			newPawn = AProtoPawn::AProtoPawn();
 			newPawn->DNA = UDNA::Mutate(newDNA[1], mutateChance);
+			nextGeneration.emplace(newPawn);
 			curentSize++;
 		}
 	}
+	Population.Append(nextGeneration, nextGeneration.Num());
 }
 
 // handles the structure of the genetic algorithm
