@@ -45,7 +45,7 @@ public:
 
 	// mutates the DNA
 	UFUNCTION(BlueprintCallable)
-		UDNA* Mutate(UDNA* DNA, int chance);
+		UDNA* Mutate(UDNA* DNA, int chance, int maxChange);
 
 	// returns two children of the two UDNA
 	UFUNCTION(BlueprintCallable)

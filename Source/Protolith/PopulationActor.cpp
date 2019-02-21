@@ -80,20 +80,20 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType);
 
 		parent0 = 0;
-		//rand() % Population.Num() + 1;
+		//rand() % Population.Num();
 		parent1 = 1;
-		//rand() % Population.Num() + 1;
+		//rand() % Population.Num();
 		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
 		newPawn->DNA->Cross(Population[parent0]->DNA, Population[0]->DNA);
 		//newDNA.Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-		newPawn->DNA->Mutate(newPawn->DNA, mutateChance);
+		newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
 		//newPawn.DNA = &newDNA;
 		nextGeneration.Emplace(newPawn);
 		currentSize++;
 
 		if (currentSize < initialSize) {
 			//newPawn.DNA = &newDNA;
-			//newPawn.DNA->Mutate(&newDNA, mutateChance);
+			//newPawn.DNA->Mutate(&newDNA, mutateChance, maxMutateChange);
 			nextGeneration.Emplace(newPawn);
 			currentSize++;
 		}

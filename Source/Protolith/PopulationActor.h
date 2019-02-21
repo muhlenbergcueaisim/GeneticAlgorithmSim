@@ -51,6 +51,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.0", UIMax = "1.0"))
 		float mutateChance = 0.2;
 
+	// the largest effect that mutation could have
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "1"))
+		int maxMutateChange = 1;
+
 	// a flag for the user to stop making new generations
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool stop = false;

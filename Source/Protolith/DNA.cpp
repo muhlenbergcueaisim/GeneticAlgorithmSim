@@ -47,16 +47,11 @@ UDNA* UDNA::Replicate(UDNA* origDNA)
 }
 
 // mutates the DNA
-UDNA *UDNA::Mutate(UDNA * DNA, int chance)
+UDNA *UDNA::Mutate(UDNA * DNA, int chance, int maxChange)
 {
 	for (int i = 0; i < DNA->NumberOfGenes; i++) {
 		if (rand() % 100 < chance) {
-			if (rand() % 2 == 0) {
-				DNA->Genes[i]++;
-			}
-			else {
-				DNA->Genes[i]--;
-			}
+			DNA->Genes[i] = DNA->Genes[i] + (rand() % (2 * maxChange + 1) - maxChange);
 		}
 	}
 
