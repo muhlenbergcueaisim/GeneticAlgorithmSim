@@ -71,8 +71,8 @@ TArray<UDNA*> UDNA::Cross(UDNA* parent0, UDNA* parent1)
 	int mask0, mask1, randomNum, minLen, maxLen, child0GeneCount, child1GeneCount;
 	UDNA* longParent;
 
-	children.emplace(UDNA::UDNA());
-	children.emplace(UDNA::UDNA());
+	children.Emplace(UDNA::UDNA());
+	children.Emplace(UDNA::UDNA());
 
 	if (parent0->NumberOfGenes < parent1->NumberOfGenes) {
 		minLen = parent0->NumberOfGenes;
@@ -100,22 +100,22 @@ TArray<UDNA*> UDNA::Cross(UDNA* parent0, UDNA* parent1)
 			}
 		}
 		mask0 = mask0 << randomNum;
-		children[0]->Genes.emplace((parent0->Genes[i] & mask0) | (parent1->Genes[i] & mask1));
-		children[1]->Genes.emplace((parent0->Genes[i] & mask1) | (parent1->Genes[i] & mask0));
+		children[0]->Genes.Emplace((parent0->Genes[i] & mask0) | (parent1->Genes[i] & mask1));
+		children[1]->Genes.Emplace((parent0->Genes[i] & mask1) | (parent1->Genes[i] & mask0));
 	}
 	for (int i = minLen; i < maxLen; i++) {
 		randomNum = rand() % 3;
 		if (randomNum == 0) {
-			children[0]->Genes.emplace(longPraent->Genes[i]);
+			children[0]->Genes.Emplace(longPraent->Genes[i]);
 			child0GeneCount++;
 		}
 		else if (randomNum == 1) {
-			children[1]->Genes.emplace(longPraent->Genes[i]);
+			children[1]->Genes.Emplace(longPraent->Genes[i]);
 			child1GeneCount++;
 		}
 		else {
-			children[0]->Genes.emplace(longPraent->Genes[i]);
-			children[1]->Genes.emplace(longPraent->Genes[i]);
+			children[0]->Genes.Emplace(longPraent->Genes[i]);
+			children[1]->Genes.Emplace(longPraent->Genes[i]);
 			child0GeneCount++;
 			child1GeneCount++;
 		}

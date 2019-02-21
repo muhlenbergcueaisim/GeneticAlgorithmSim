@@ -59,7 +59,7 @@ void APopulationActor::eliminate()
 	TArray<AProtoPawn*> remainingPopulation = TArray<AProtoPawn*>();
 	int newPopulationSize = initialSize * recuringPopulation;
 	for (int i = 0; i < newPopulationSize; i++) {
-		remainingPopulation.emplace(Population[i]);
+		remainingPopulation.Emplace(Population[i]);
 	}
 	Population = remainingPopulation;
 	curentSize = newPopulationSize;
@@ -80,13 +80,13 @@ void APopulationActor::reproduce()
 
 		newPawn = AProtoPawn::AProtoPawn();
 		newPawn->DNA = UDNA::Mutate(newDNA[0], mutateChance);
-		nextGeneration.emplace(newPawn);
+		nextGeneration.Emplace(newPawn);
 		curentSize++;
 
 		if (curentSize < initialSize) {
 			newPawn = AProtoPawn::AProtoPawn();
 			newPawn->DNA = UDNA::Mutate(newDNA[1], mutateChance);
-			nextGeneration.emplace(newPawn);
+			nextGeneration.Emplace(newPawn);
 			curentSize++;
 		}
 	}
