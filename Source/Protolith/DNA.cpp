@@ -7,9 +7,8 @@ UDNA::UDNA()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-	float floatVal = 0.7f;
-	
+	//InitializeComponent();
+	PrimaryComponentTick.bCanEverTick = true;	
 	//Genes.Add(Gene);
 
 }
@@ -48,7 +47,7 @@ UDNA* UDNA::Replicate(UDNA* origDNA)
 }
 
 // mutates the DNA
-UDNA * UDNA::Mutate(UNDA * DNA, int chance)
+UDNA *UDNA::Mutate(UDNA * DNA, int chance)
 {
 	for (int i = 0; i < DNA->NumberOfGenes; i++) {
 		if (rand() % 100 < chance) {
@@ -67,12 +66,12 @@ UDNA * UDNA::Mutate(UNDA * DNA, int chance)
 // returns two children of the two UDNA
 TArray<UDNA*> UDNA::Cross(UDNA* parent0, UDNA* parent1)
 {
-	TArray<UDNA*> children = TArray<UNDA*>();
+	TArray<UDNA*> children;
 	int mask0, mask1, randomNum, minLen, maxLen, child0GeneCount, child1GeneCount;
 	UDNA* longParent;
 
-	children.Emplace(UDNA::UDNA());
-	children.Emplace(UDNA::UDNA());
+	children.Emplace();
+	children.Emplace();
 
 	if (parent0->NumberOfGenes < parent1->NumberOfGenes) {
 		minLen = parent0->NumberOfGenes;
@@ -106,16 +105,16 @@ TArray<UDNA*> UDNA::Cross(UDNA* parent0, UDNA* parent1)
 	for (int i = minLen; i < maxLen; i++) {
 		randomNum = rand() % 3;
 		if (randomNum == 0) {
-			children[0]->Genes.Emplace(longPraent->Genes[i]);
+			children[0]->Genes.Emplace(longParent->Genes[i]);
 			child0GeneCount++;
 		}
 		else if (randomNum == 1) {
-			children[1]->Genes.Emplace(longPraent->Genes[i]);
+			children[1]->Genes.Emplace(longParent->Genes[i]);
 			child1GeneCount++;
 		}
 		else {
-			children[0]->Genes.Emplace(longPraent->Genes[i]);
-			children[1]->Genes.Emplace(longPraent->Genes[i]);
+			children[0]->Genes.Emplace(longParent->Genes[i]);
+			children[1]->Genes.Emplace(longParent->Genes[i]);
 			child0GeneCount++;
 			child1GeneCount++;
 		}

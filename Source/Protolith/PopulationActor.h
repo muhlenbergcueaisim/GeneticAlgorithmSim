@@ -5,9 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ProtoPawn.h"
-#include "PopulationActor.generated.h"
 #include <cstdlib>
 #include "DNA.h"
+#include "PopulationActor.generated.h"
+
 
 UCLASS()
 class PROTOLITH_API APopulationActor : public AActor
@@ -66,7 +67,7 @@ public:
 
 	// initializes the population
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
-		TArray<AProtoPawn*> PopGenesis();
+		TArray<AProtoPawn*> PopGenesis(FTransform spawnTransform);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		TSubclassOf<AProtoPawn> PawnType;
@@ -82,10 +83,9 @@ public:
 
 	// refills the population with a new generation
 	UFUNCTION(BlueprintCallable)
-		void reproduce();
+		void reproduce(TArray<AProtoPawn*> pop);
 
 	// handles the structure of the genetic algorithm
 	UFUNCTION(BlueprintCallable)
 		void geneticAlgorithm();
 };
-

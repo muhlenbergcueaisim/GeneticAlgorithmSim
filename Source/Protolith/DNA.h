@@ -5,8 +5,9 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Gene.h"
-#include "DNA.generated.h"
 #include <cstdlib>
+#include "DNA.generated.h"
+
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class PROTOLITH_API UDNA : public UActorComponent
@@ -44,7 +45,7 @@ public:
 
 	// mutates the DNA
 	UFUNCTION(BlueprintCallable)
-		UDNA* Mutate(UNDA* DNA, int chance);
+		UDNA* Mutate(UDNA* DNA, int chance);
 
 	// returns two children of the two UDNA
 	UFUNCTION(BlueprintCallable)

@@ -1,13 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "PopulationActor.h"
+#include "math.h"
 
 // Sets default values
 APopulationActor::APopulationActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	Population = PopGenesis();
+	//Population = PopGenesis();
 
 }
 
@@ -26,22 +27,22 @@ void APopulationActor::Tick(float DeltaTime)
 }
 
 // initializes the population and returns an array of pawn actors
-TArray<AProtoPawn*> APopulationActor::PopGenesis()
+TArray<AProtoPawn*> APopulationActor::PopGenesis(FTransform spawnTransform)
 {
 	TArray <AProtoPawn*> newPopulation = TArray<AProtoPawn*>();
 	
-	for (int i = 0; i <= initialSize; i++)
+	for (int i = 0; i <= initialSize-20; i++)
 	{
 		//pawnType = PawnTypes[0];
 		// get a reference to the world
 		UWorld* world = GetWorld();
 
-		//AProtoPawn* ReturnPawn = world->SpawnActor<AProtoPawn>(PawnType, popOrigin);
+		AProtoPawn* ReturnPawn = world->SpawnActor<AProtoPawn>(PawnType, popOrigin);
 
 		// increment current size
 		currentSize++;
 		UE_LOG(LogTemp, Warning, TEXT("adding pawn to population..."));
-		//newPopulation.Add(ReturnPawn);
+		newPopulation.Add(ReturnPawn);
 		//newPopulation[i] = ReturnPawn;
 	}
 
@@ -62,35 +63,40 @@ void APopulationActor::eliminate()
 		remainingPopulation.Emplace(Population[i]);
 	}
 	Population = remainingPopulation;
-	curentSize = newPopulationSize;
+	currentSize = newPopulationSize;
 }
 
 // refills the population with a new generation
-void APopulationActor::reproduce()
+void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 {
 	int parent0, parent1;
-	TArray<UDNA*> newDNA = TArray<UDNA*>
-	TArray<AProtoPawn*> nextGeneration = TArray<AProtoPawn*>();
-	AProtoPawn* newPawn;
+	
+	TArray<AProtoPawn*> nextGeneration;
+	//UDNA newDNA;
 
-	while (curentSize < initialSize) {
-		parent0 = rand() % Population.Num();
-		parent1 = rand() % Population.Num();
-		newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
+	while (currentSize < initialSize) {
+		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType);
 
-		newPawn = AProtoPawn::AProtoPawn();
-		newPawn->DNA = UDNA::Mutate(newDNA[0], mutateChance);
+		parent0 = 0;
+		//rand() % Population.Num() + 1;
+		parent1 = 1;
+		//rand() % Population.Num() + 1;
+		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
+		newPawn->DNA->Cross(Population[parent0]->DNA, Population[0]->DNA);
+		//newDNA.Cross(Population[parent0]->DNA, Population[parent1]->DNA);
+		newPawn->DNA->Mutate(newPawn->DNA, mutateChance);
+		//newPawn.DNA = &newDNA;
 		nextGeneration.Emplace(newPawn);
-		curentSize++;
+		currentSize++;
 
-		if (curentSize < initialSize) {
-			newPawn = AProtoPawn::AProtoPawn();
-			newPawn->DNA = UDNA::Mutate(newDNA[1], mutateChance);
+		if (currentSize < initialSize) {
+			//newPawn.DNA = &newDNA;
+			//newPawn.DNA->Mutate(&newDNA, mutateChance);
 			nextGeneration.Emplace(newPawn);
-			curentSize++;
+			currentSize++;
 		}
 	}
-	Population.Append(nextGeneration, nextGeneration.Num());
+	Population.Append(nextGeneration);
 }
 
 // handles the structure of the genetic algorithm
@@ -98,9 +104,10 @@ void APopulationActor::geneticAlgorithm()
 {
 	while (!stop) {
 		//need a way to ensure that the fitness of each pawn has been calculated
-		Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
+		// no idea what's going on here and it breaks compile
+		// Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
 		eliminate();
-		reproduce();
+		reproduce(Population);
 	}
 }
 
