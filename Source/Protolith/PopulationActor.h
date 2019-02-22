@@ -59,6 +59,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool stop = false;
 
+	// a flag to say weather or not you need two different pawns as parents
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool twoParents = true;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		AProtoPawn* pawnToSpawn;
 
@@ -92,4 +96,8 @@ public:
 	// handles the structure of the genetic algorithm
 	UFUNCTION(BlueprintCallable)
 		void geneticAlgorithm();
+
+	// gets an index for a parent
+	UFUNCTION(BlueprintCallable)
+		int getIndex();
 };

@@ -79,9 +79,19 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 	while (currentSize < initialSize) {
 		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType);
 
-		parent0 = 0;
+		parent0 = getIndex();
+		if (twoParents) {
+			do {
+				parent1 = getIndex();
+			} while (parent0 == parent1)
+		}
+		else {
+			parent1 = getIndex();
+		}
+
+		//parent0 = 0;
 		//rand() % Population.Num();
-		parent1 = 1;
+		//parent1 = 1;
 		//rand() % Population.Num();
 		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
 		newPawn->DNA->Cross(&newDNA, Population[parent0]->DNA, Population[0]->DNA);
@@ -114,3 +124,16 @@ void APopulationActor::geneticAlgorithm()
 	}
 }
 
+// gets an index for a parent
+int APopulationActor::getIndex()
+{
+	int randomNum, index;
+	randomNum = rand() % (1 << Population.Num());
+	index = Population.Num() - 1;
+
+	while (randomNum > 0) {
+		randomNum = randomNum / 2;
+		index--;
+	}
+	return index;
+}
