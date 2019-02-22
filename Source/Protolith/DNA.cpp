@@ -59,10 +59,10 @@ UDNA *UDNA::Mutate(UDNA * DNA, int chance, int maxChange)
 }
 
 // returns two children of the two UDNA
-UDNA* UDNA::Cross(UDNA* parent0, UDNA* parent1)
+UDNA *UDNA::Cross(UDNA* DNA, UDNA* parent0, UDNA* parent1)
 {
 	//TArray<UDNA*> children;
-	UDNA* DNA; //added
+	//UDNA newDNA = UDNA::UDNA(); //added
 	int mask0, mask1, randomNum, minLen, maxLen;
 	int geneCount; //added
 	//int child0GeneCount, child1GeneCount;

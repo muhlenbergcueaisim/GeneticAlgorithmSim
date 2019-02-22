@@ -74,7 +74,7 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 	int parent0, parent1;
 	
 	TArray<AProtoPawn*> nextGeneration;
-	//UDNA newDNA;
+	UDNA newDNA;// = UDNA::UDNA();
 
 	while (currentSize < initialSize) {
 		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType);
@@ -84,7 +84,7 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 		parent1 = 1;
 		//rand() % Population.Num();
 		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-		newPawn->DNA->Cross(Population[parent0]->DNA, Population[0]->DNA);
+		newPawn->DNA->Cross(&newDNA, Population[parent0]->DNA, Population[0]->DNA);
 		//newDNA.Cross(Population[parent0]->DNA, Population[parent1]->DNA);
 		newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
 		//newPawn.DNA = &newDNA;

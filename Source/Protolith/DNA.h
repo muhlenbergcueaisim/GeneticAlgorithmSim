@@ -49,5 +49,5 @@ public:
 
 	// returns two children of the two UDNA
 	UFUNCTION(BlueprintCallable)
-		UDNA* Cross(UDNA* parent0, UDNA* parent1);
+		UDNA* Cross(UDNA* DNA, UDNA* parent0, UDNA* parent1);
 };
