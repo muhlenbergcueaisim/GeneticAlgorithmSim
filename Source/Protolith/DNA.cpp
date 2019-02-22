@@ -59,14 +59,17 @@ UDNA *UDNA::Mutate(UDNA * DNA, int chance, int maxChange)
 }
 
 // returns two children of the two UDNA
-TArray<UDNA*> UDNA::Cross(UDNA* parent0, UDNA* parent1)
+UDNA* UDNA::Cross(UDNA* parent0, UDNA* parent1)
 {
-	TArray<UDNA*> children;
-	int mask0, mask1, randomNum, minLen, maxLen, child0GeneCount, child1GeneCount;
+	//TArray<UDNA*> children;
+	UDNA* DNA; //added
+	int mask0, mask1, randomNum, minLen, maxLen;
+	int geneCount; //added
+	//int child0GeneCount, child1GeneCount;
 	UDNA* longParent;
 
-	children.Emplace();
-	children.Emplace();
+	//children.Emplace();
+	//children.Emplace();
 
 	if (parent0->NumberOfGenes < parent1->NumberOfGenes) {
 		minLen = parent0->NumberOfGenes;
@@ -78,8 +81,9 @@ TArray<UDNA*> UDNA::Cross(UDNA* parent0, UDNA* parent1)
 		maxLen = parent0->NumberOfGenes;
 		longParent = parent0;
 	}
-	child0GeneCount = minLen;
-	child1GeneCount = minLen;
+	geneCount = minLen; //added
+	//child0GeneCount = minLen;
+	//child1GeneCount = minLen;
 
 	for (int i = 0; i < minLen; i++) {
 		randomNum = rand() % 32 + 1;
@@ -94,10 +98,16 @@ TArray<UDNA*> UDNA::Cross(UDNA* parent0, UDNA* parent1)
 			}
 		}
 		mask0 = mask0 << randomNum;
-		children[0]->Genes.Emplace((parent0->Genes[i] & mask0) | (parent1->Genes[i] & mask1));
-		children[1]->Genes.Emplace((parent0->Genes[i] & mask1) | (parent1->Genes[i] & mask0));
+		DNA->Genes.Emplace((parent0->Genes[i] & mask0) | (parent1->Genes[i] & mask1)); //added
+		//children[0]->Genes.Emplace((parent0->Genes[i] & mask0) | (parent1->Genes[i] & mask1));
+		//children[1]->Genes.Emplace((parent0->Genes[i] & mask1) | (parent1->Genes[i] & mask0));
 	}
 	for (int i = minLen; i < maxLen; i++) {
+		if (rand() % 2 == 0) { //added
+			DNA->Genes.Emplace(longParent->Genes[i]); //added
+			geneCount++; //added
+		} //added
+		/*
 		randomNum = rand() % 3;
 		if (randomNum == 0) {
 			children[0]->Genes.Emplace(longParent->Genes[i]);
@@ -113,8 +123,11 @@ TArray<UDNA*> UDNA::Cross(UDNA* parent0, UDNA* parent1)
 			child0GeneCount++;
 			child1GeneCount++;
 		}
+		*/
 	}
-	children[0]->NumberOfGenes = child0GeneCount;
-	children[1]->NumberOfGenes = child1GeneCount;
-	return children;
+	DNA->NumberOfGenes = geneCount; //added
+	//children[0]->NumberOfGenes = child0GeneCount;
+	//children[1]->NumberOfGenes = child1GeneCount;
+	return DNA; //added
+	//return children;
 }

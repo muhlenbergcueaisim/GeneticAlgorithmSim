@@ -90,13 +90,14 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 		//newPawn.DNA = &newDNA;
 		nextGeneration.Emplace(newPawn);
 		currentSize++;
-
+		/*
 		if (currentSize < initialSize) {
 			//newPawn.DNA = &newDNA;
 			//newPawn.DNA->Mutate(&newDNA, mutateChance, maxMutateChange);
 			nextGeneration.Emplace(newPawn);
 			currentSize++;
 		}
+		*/
 	}
 	Population.Append(nextGeneration);
 }
