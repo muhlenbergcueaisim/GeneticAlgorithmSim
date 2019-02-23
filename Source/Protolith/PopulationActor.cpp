@@ -29,17 +29,26 @@ void APopulationActor::Tick(float DeltaTime)
 // initializes the population and returns an array of pawn actors
 TArray<AProtoPawn*> APopulationActor::PopGenesis(TArray<FTransform> spawnTransform)
 {
+	// create a new population of pawns
 	TArray <AProtoPawn*> newPopulation = TArray<AProtoPawn*>();
+	
+	// get the length of the array
+	int popLength = newPopulation.Num();
 
+	// the number of transforms
+	int numTransforms = spawnTransform.Num();
+
+	// get a reference to the world
 	UWorld* world = GetWorld();
-
-	for (int i = 0; i <= 4; i++)
+	
+	for (int i = 0; i < numTransforms; i++)
 	{
 		//pawnType = PawnTypes[0];
-		// get a reference to the world
+		// produce a random number
+		int randSpawn = rand() % (numTransforms);
 
-		int randSpawn = rand() % 4;
-		AProtoPawn* ReturnPawn = world->SpawnActor<AProtoPawn>(PawnType, spawnTransform[randSpawn]);
+		// spawn in a line
+		AProtoPawn* ReturnPawn = world->SpawnActor<AProtoPawn>(PawnType, spawnTransform[i]);
 
 		// increment current size
 		currentSize++;
