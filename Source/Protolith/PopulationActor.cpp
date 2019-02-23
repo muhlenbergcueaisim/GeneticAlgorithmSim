@@ -83,7 +83,7 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 		if (twoParents) {
 			do {
 				parent1 = getIndex();
-			} while (parent0 == parent1)
+			} while (parent0 == parent1);
 		}
 		else {
 			parent1 = getIndex();

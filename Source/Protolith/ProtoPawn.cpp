@@ -14,12 +14,6 @@ AProtoPawn::AProtoPawn()
 void AProtoPawn::BeginPlay()
 {
 	Super::BeginPlay();
-	//UE_LOG(LogTemp, Warning, TEXT("pawn genes: %f"), DNA->Genes[0]->floatValue);
-
-	//Root = CreateDefaultSubobject<USceneComponent>("Root");
-	//RootComponent = Root;
-	//DNA = CreateDefaultSubobject<UDNA>("DNA");
-	//DNA->Genes[0]->floatValue = 4.7f;
 	
 }
 
