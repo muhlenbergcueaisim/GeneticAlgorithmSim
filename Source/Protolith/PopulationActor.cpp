@@ -119,6 +119,9 @@ void APopulationActor::geneticAlgorithm()
 		//need a way to ensure that the fitness of each pawn has been calculated
 		// no idea what's going on here and it breaks compile
 		// Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
+        int n = sizeof(TArray<AProtoPawn*>)/sizeof(TArray<AProtoPawn*>[0]);
+        sort(TArray<AProtoPawn*>, 0, n-1);
+        
 		eliminate();
 		reproduce(Population);
 	}
@@ -137,3 +140,49 @@ int APopulationActor::getIndex()
 	}
 	return index;
 }
+
+
+
+
+
+// swap function for quicksort
+void APopulationActor::swap(AProtoPawn* a, AProtoPawn* b)
+{
+    AProtoPawn* t = *a;
+    *a = *b;
+}
+
+// ********should be comparing their fitness, not value of protopawn
+AProtoPawn partition(TArray<AProtoPawn*>, AProtoPawn low, AProtoPawn.fitness high)
+{
+    int pivot = TArray<AProtoPawn*>[high]; // pivot
+    int i = (low - 1); // Index of smaller element
+    
+    for (int j = low; j <= high- 1; j++)
+    {
+        // If current element is smaller than or
+        // equal to pivot
+        if (TArray<AProtoPawn*>[j] <= pivot)
+        {
+            i++; // increment index of smaller element
+            swap(&TArray<AProtoPawn*>[i], &TArray<AProtoPawn*>[j]);
+        }
+    }
+    swap(&TArray<AProtoPawn*>[i + 1], &TArray<AProtoPawn*>[high]);
+    return (i + 1);
+}
+
+void APopulationActor::sort(TArray<AProtoPawn*>[], int low, int high)
+{
+    if (low < high)
+    {
+        int par = partition(TArray<AProtoPawn*>, low, high);
+        sort(TArray<AProtoPawn*>, low, par - 1);
+        sort(TArray<AProtoPawn*>, par + 1, high);
+        
+    }
+}
+
+
+
+
