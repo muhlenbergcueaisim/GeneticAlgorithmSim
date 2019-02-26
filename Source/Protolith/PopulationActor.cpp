@@ -78,16 +78,26 @@ void APopulationActor::eliminate()
 }
 
 // refills the population with a new generation
-void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
+AProtoPawn* APopulationActor::reproduce(TArray<AProtoPawn*> pop, FTransform birthTransform)
 {
-	int parent0, parent1;
+
+	AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType, birthTransform);;
+
+	//int parent0, parent1;
 	
-	TArray<AProtoPawn*> nextGeneration;
-	UDNA newDNA;// = UDNA::UDNA();
+	//TArray<AProtoPawn*> nextGeneration;
+	//newPawn->DNA->Cross(newPawn->DNA, pop[parent0]->DNA, pop[parent1]->DNA);
+	pop.Add(newPawn);
+	currentSize++;
+	//Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
 
+	return newPawn;
+	//UDNA newDNA;// = UDNA::UDNA();
+	//AProtoPawn newPawn = AProtoPawn();
+
+	/*
 	while (currentSize < initialSize) {
-		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType);
-
+		
 		parent0 = getIndex();
 		if (twoParents) {
 			do {
@@ -98,17 +108,25 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 			parent1 = getIndex();
 		}
 
+		//newPawn->DNA->Cross(newPawn->DNA, pop[parent0]->DNA, pop[parent1]->DNA);
+		//newPawn->DNA.Cross(newPawn.DNA, Population[parent0]->DNA, Population[0]->DNA);
+		//pop.Add(newPawn);
+		currentSize++;
+
+	
+		
+
 		//parent0 = 0;
 		//rand() % Population.Num();
 		//parent1 = 1;
 		//rand() % Population.Num();
 		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-		newPawn->DNA->Cross(&newDNA, Population[parent0]->DNA, Population[0]->DNA);
+
 		//newDNA.Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-		newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
+		//newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
 		//newPawn.DNA = &newDNA;
-		nextGeneration.Emplace(newPawn);
-		currentSize++;
+		//nextGeneration.Emplace(newPawn);
+		
 		/*
 		if (currentSize < initialSize) {
 			//newPawn.DNA = &newDNA;
@@ -116,9 +134,12 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 			nextGeneration.Emplace(newPawn);
 			currentSize++;
 		}
-		*/
+	
 	}
-	Population.Append(nextGeneration);
+
+	*/
+	//Population.Append(nextGeneration);
+
 }
 
 // handles the structure of the genetic algorithm
@@ -127,9 +148,9 @@ void APopulationActor::geneticAlgorithm()
 	while (!stop) {
 		//need a way to ensure that the fitness of each pawn has been calculated
 		// no idea what's going on here and it breaks compile
-		// Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
+		//Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
 		eliminate();
-		reproduce(Population);
+		//reproduce(Population);
 	}
 }
 
