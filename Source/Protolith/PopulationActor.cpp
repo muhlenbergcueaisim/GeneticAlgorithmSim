@@ -150,6 +150,7 @@ void APopulationActor::swap(AProtoPawn* a, AProtoPawn* b)
 {
     AProtoPawn* t = *a;
     *a = *b;
+    *b = t;
 }
 
 // ********should be comparing their fitness, not value of protopawn
