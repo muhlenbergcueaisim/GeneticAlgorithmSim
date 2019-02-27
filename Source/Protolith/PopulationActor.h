@@ -97,6 +97,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void geneticAlgorithm();
 
+	// checks if all of the pawns have had their fitness's set
+	UFUNCTION(BlueprintCallable)
+		bool fitnessesSet();
+
 	// gets an index for a parent
 	UFUNCTION(BlueprintCallable)
 		int getIndex();

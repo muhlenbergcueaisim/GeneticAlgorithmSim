@@ -38,6 +38,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float fitness;
 
+	// this is a boolean to see if the fitness has been set
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool fitnessSet = false;
+
 
 	/*
 	*	SCENE COMPONENTS
