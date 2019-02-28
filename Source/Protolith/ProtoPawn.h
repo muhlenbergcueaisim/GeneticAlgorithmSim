@@ -31,20 +31,21 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	// this pawn's DNA object
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		UDNA* DNA;
 
 	// this is the pawn's fintess score
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		float fitness;
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
+		bool isFinished;
 	/*
 	*	SCENE COMPONENTS
 	*/
 
 	// Root scene component
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ServbotDash")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		USceneComponent* Root;
 
 	// the blueprint component to represent pointing direction

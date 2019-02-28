@@ -83,10 +83,10 @@ AProtoPawn* APopulationActor::reproduce(TArray<AProtoPawn*> pop, FTransform birt
 
 	AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType, birthTransform);;
 
-	//int parent0, parent1;
+	int parent0, parent1;
 	
-	//TArray<AProtoPawn*> nextGeneration;
-	//newPawn->DNA->Cross(newPawn->DNA, pop[parent0]->DNA, pop[parent1]->DNA);
+	TArray<AProtoPawn*> nextGeneration;
+	newPawn->DNA->Cross(newPawn->DNA, pop[parent0]->DNA, pop[parent1]->DNA);
 	pop.Add(newPawn);
 	currentSize++;
 	//Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
