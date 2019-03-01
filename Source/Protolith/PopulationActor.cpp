@@ -78,26 +78,16 @@ void APopulationActor::eliminate()
 }
 
 // refills the population with a new generation
-AProtoPawn* APopulationActor::reproduce(TArray<AProtoPawn*> pop, FTransform birthTransform)
+void APopulationActor::Reproduce(TArray<AProtoPawn*> pop)
 {
-
-	AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType, birthTransform);;
-
 	int parent0, parent1;
-	
+
 	TArray<AProtoPawn*> nextGeneration;
-	newPawn->DNA->Cross(newPawn->DNA, pop[parent0]->DNA, pop[parent1]->DNA);
-	pop.Add(newPawn);
-	currentSize++;
-	//Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
+	UDNA newDNA;// = UDNA::UDNA();
 
-	return newPawn;
-	//UDNA newDNA;// = UDNA::UDNA();
-	//AProtoPawn newPawn = AProtoPawn();
-
-	/*
 	while (currentSize < initialSize) {
-		
+		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType);
+
 		parent0 = getIndex();
 		if (twoParents) {
 			do {
@@ -108,25 +98,17 @@ AProtoPawn* APopulationActor::reproduce(TArray<AProtoPawn*> pop, FTransform birt
 			parent1 = getIndex();
 		}
 
-		//newPawn->DNA->Cross(newPawn->DNA, pop[parent0]->DNA, pop[parent1]->DNA);
-		//newPawn->DNA.Cross(newPawn.DNA, Population[parent0]->DNA, Population[0]->DNA);
-		//pop.Add(newPawn);
-		currentSize++;
-
-	
-		
-
 		//parent0 = 0;
 		//rand() % Population.Num();
 		//parent1 = 1;
 		//rand() % Population.Num();
 		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-
+		newPawn->DNA->Cross(&newDNA, Population[parent0]->DNA, Population[0]->DNA);
 		//newDNA.Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-		//newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
+		newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
 		//newPawn.DNA = &newDNA;
-		//nextGeneration.Emplace(newPawn);
-		
+		nextGeneration.Emplace(newPawn);
+		currentSize++;
 		/*
 		if (currentSize < initialSize) {
 			//newPawn.DNA = &newDNA;
@@ -134,12 +116,9 @@ AProtoPawn* APopulationActor::reproduce(TArray<AProtoPawn*> pop, FTransform birt
 			nextGeneration.Emplace(newPawn);
 			currentSize++;
 		}
-	
+		*/
 	}
-
-	*/
-	//Population.Append(nextGeneration);
-
+	Population.Append(nextGeneration);
 }
 
 // handles the structure of the genetic algorithm

@@ -91,7 +91,7 @@ public:
 
 	// refills the population with a new generation
 	UFUNCTION(BlueprintCallable)
-		AProtoPawn* reproduce(TArray<AProtoPawn*> pop, FTransform birthTransform);
+		AProtoPawn* Reproduce(TArray<AProtoPawn*> pop, FTransform birthTransform);
 
 	// handles the structure of the genetic algorithm
 	UFUNCTION(BlueprintCallable)
