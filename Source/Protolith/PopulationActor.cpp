@@ -129,7 +129,7 @@ void APopulationActor::geneticAlgorithm()
 bool APopulationActor::fitnessesSet()
 {
 	for (int i = 0; i < curentSize; i++) {
-		if (!Population[i]->fitnessSet) {
+		if (!Population[i]->isFinished) {
 			return false;
 		}
 	}

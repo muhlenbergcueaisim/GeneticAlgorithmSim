@@ -40,7 +40,7 @@ public:
 
 	// this is a boolean to see if the fitness has been set
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		bool fitnessSet = false;
+		bool isFinished = false;
 
 
 	/*
