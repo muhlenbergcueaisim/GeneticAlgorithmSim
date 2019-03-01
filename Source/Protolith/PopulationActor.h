@@ -47,7 +47,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith", meta = (UIMin = "0.0", UIMax = "1.0"))
 		float crossoverChance = 0.2;
 
-	// the amount of the population to keep at the end of each generation
+	// the percentage of the population to keep at the end of each generation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.1", UIMax = "0.5"))
 		float recuringPopulation = 0.2;
 

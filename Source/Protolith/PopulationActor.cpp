@@ -68,8 +68,14 @@ void APopulationActor::eliminate()
 {
 	TArray<AProtoPawn*> remainingPopulation = TArray<AProtoPawn*>();
 	int newPopulationSize = initialSize * recuringPopulation;
-	for (int i = 0; i < newPopulationSize; i++) {
-		remainingPopulation.Emplace(Population[i]);
+	for (int i = 0; i < initialSize; i++) {
+		if (i < newPopulationSize)
+		{
+			remainingPopulation.Add(Population[i]);
+		}
+		else {
+			Population[i]->Destroy();
+		}
 	}
 	Population = remainingPopulation;
 	currentSize = newPopulationSize;
@@ -81,7 +87,7 @@ void APopulationActor::Reproduce(TArray<AProtoPawn*> pop)
 	int parent0, parent1;
 
 	TArray<AProtoPawn*> nextGeneration;
-	UDNA newDNA;// = UDNA::UDNA();
+	//UDNA newDNA;// = UDNA::UDNA();
 
 	while (currentSize < initialSize) {
 		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType);
@@ -101,7 +107,7 @@ void APopulationActor::Reproduce(TArray<AProtoPawn*> pop)
 		//parent1 = 1;
 		//rand() % Population.Num();
 		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-		newPawn->DNA->Cross(&newDNA, Population[parent0]->DNA, Population[0]->DNA);
+		newPawn->DNA->Cross(newPawn->DNA, Population[parent0]->DNA, Population[0]->DNA);
 		//newDNA.Cross(Population[parent0]->DNA, Population[parent1]->DNA);
 		newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
 		//newPawn.DNA = &newDNA;
