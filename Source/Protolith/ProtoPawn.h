@@ -38,6 +38,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		float fitness;
 
+	// has the pawn finished its fitness function?
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		bool isFinished;
 	/*
@@ -49,10 +50,10 @@ public:
 		USceneComponent* Root;
 
 	// the blueprint component to represent pointing direction
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ServbotDash")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		UArrowComponent* MyArrowComponent;
 
 	// blueprint component for the box component
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ServbotDash")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		UBoxComponent* MyBoxComponent;
 };

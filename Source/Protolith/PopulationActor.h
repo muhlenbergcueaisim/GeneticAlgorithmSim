@@ -27,6 +27,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	/*
+	*	PROPERTIES
+	*/
+
 	// Number of seed individuals
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		int initialSize = 9;
@@ -63,45 +67,43 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool twoParents = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		AProtoPawn* pawnToSpawn;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		FTransform popOrigin;
-
 	// an array of pointers to actors in the population
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<AProtoPawn*> Population;
 
-	// initializes the population
-	UFUNCTION(BlueprintCallable, Category = "Protolith")
-		TArray<AProtoPawn*> PopGenesis(TArray<FTransform> spawnTransform);
-
+	// allows us to select a blueprint of type ProtoPawn for the simulation
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		TSubclassOf<AProtoPawn> PawnType;
 
+	/*
+	*	FUNCTIONS
+	*/
+
+	// initializes the population
+	UFUNCTION(BlueprintCallable, Category = "Protolith")
+		TArray<AProtoPawn*> PopGenesis(TArray<FTransform> spawnTransform);
+	
 	// evaluates the fitness of each member of the population
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		void EvaluateFitness(TArray<AProtoPawn*> Pop);
-	
 
 	// removes the weakest pawns
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		void eliminate();
 
 	// refills the population with a new generation
-	UFUNCTION(BlueprintCallable)
-		AProtoPawn* Reproduce(TArray<AProtoPawn*> pop, FTransform birthTransform);
+	UFUNCTION(BlueprintCallable, Category = "Protolith")
+		void Reproduce(TArray<AProtoPawn*> pop);
 
 	// handles the structure of the genetic algorithm
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		void geneticAlgorithm();
 
 	// checks if all of the pawns have had their fitness's set
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		bool fitnessesSet();
 
 	// gets an index for a parent
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		int getIndex();
 };

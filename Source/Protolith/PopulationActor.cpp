@@ -8,7 +8,6 @@ APopulationActor::APopulationActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	//Population = PopGenesis();
 
 }
 
@@ -43,7 +42,6 @@ TArray<AProtoPawn*> APopulationActor::PopGenesis(TArray<FTransform> spawnTransfo
 	
 	for (int i = 0; i < numTransforms; i++)
 	{
-		//pawnType = PawnTypes[0];
 		// produce a random number
 		int randSpawn = rand() % (numTransforms);
 
@@ -52,9 +50,9 @@ TArray<AProtoPawn*> APopulationActor::PopGenesis(TArray<FTransform> spawnTransfo
 
 		// increment current size
 		currentSize++;
-		UE_LOG(LogTemp, Warning, TEXT("adding pawn to population..."));
+
+		// add the pawn to the population
 		newPopulation.Add(ReturnPawn);
-		//newPopulation[i] = ReturnPawn;
 	}
 
 	return newPopulation;
@@ -129,7 +127,7 @@ void APopulationActor::geneticAlgorithm()
 			// no idea what's going on here and it breaks compile
 			// Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
 			eliminate();
-			reproduce(Population);
+			Reproduce(Population);
 		}
 	}
 }
@@ -137,8 +135,8 @@ void APopulationActor::geneticAlgorithm()
 // checks if all of the pawns have had their fitness's set
 bool APopulationActor::fitnessesSet()
 {
-	for (int i = 0; i < curentSize; i++) {
-		if (!Population[i]->fitnessSet) {
+	for (int i = 0; i < currentSize; i++) {
+		if (!Population[i]->isFinished) {
 			return false;
 		}
 	}
