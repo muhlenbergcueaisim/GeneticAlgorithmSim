@@ -36,7 +36,7 @@ public:
 		int initialSize = 9;
 
 	// the current number of individuals
-	UPROPERTY(BlueprintReadOnly, Category = "Protolith")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		int currentSize;
 
 	// enable or disable crossover
@@ -93,7 +93,7 @@ public:
 
 	// refills the population with a new generation
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
-		void Reproduce(TArray<AProtoPawn*> pop);
+		void Reproduce(TArray<AProtoPawn*> pop, TArray<FTransform> newTransforms);
 
 	// handles the structure of the genetic algorithm
 	UFUNCTION(BlueprintCallable, Category = "Protolith")

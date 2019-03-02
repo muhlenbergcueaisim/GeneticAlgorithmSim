@@ -82,16 +82,16 @@ void APopulationActor::eliminate()
 }
 
 // refills the population with a new generation
-void APopulationActor::Reproduce(TArray<AProtoPawn*> pop)
+void APopulationActor::Reproduce(TArray<AProtoPawn*> pop, TArray<FTransform> newTransforms)
 {
 	int parent0, parent1;
 
 	TArray<AProtoPawn*> nextGeneration;
 	//UDNA newDNA;// = UDNA::UDNA();
-
-	while (currentSize < initialSize) {
-		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType);
-
+	int nextGenSize = initialSize - currentSize;
+	for (int i = 0; i < nextGenSize; i++) {
+		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType, newTransforms[i]);
+		
 		parent0 = getIndex();
 		if (twoParents) {
 			do {
@@ -102,17 +102,27 @@ void APopulationActor::Reproduce(TArray<AProtoPawn*> pop)
 			parent1 = getIndex();
 		}
 
+		UE_LOG(LogTemp, Warning, TEXT("parent 0: %d \n parent 1: %d\n"), parent0, parent1);
+
+		newPawn->DNA->Cross(newPawn->DNA, Population[parent0]->DNA, Population[parent1]->DNA);
+		
+		nextGeneration.Add(newPawn);
+		currentSize++;
+
 		//parent0 = 0;
 		//rand() % Population.Num();
 		//parent1 = 1;
 		//rand() % Population.Num();
 		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-		newPawn->DNA->Cross(newPawn->DNA, Population[parent0]->DNA, Population[0]->DNA);
+
+		//newPawn->DNA->Cross(newPawn->DNA, Population[parent0]->DNA, Population[0]->DNA);
+
 		//newDNA.Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-		newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
+
+		//newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
+
 		//newPawn.DNA = &newDNA;
-		nextGeneration.Emplace(newPawn);
-		currentSize++;
+
 		/*
 		if (currentSize < initialSize) {
 			//newPawn.DNA = &newDNA;
@@ -133,7 +143,7 @@ void APopulationActor::geneticAlgorithm()
 			// no idea what's going on here and it breaks compile
 			// Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
 			eliminate();
-			Reproduce(Population);
+			//Reproduce(Population);
 		}
 	}
 }
@@ -156,7 +166,7 @@ int APopulationActor::getIndex()
 	randomNum = rand() % (1 << Population.Num());
 	index = Population.Num() - 1;
 
-	while (randomNum > 0) {
+	while (randomNum > 1) {
 		randomNum = randomNum / 2;
 		index--;
 	}

@@ -38,7 +38,7 @@ public:
 	// number of genes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
 		int NumberOfGenes;
-
+	
 	// returns a copy of itself
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		UDNA* Replicate(UDNA* origDNA);
