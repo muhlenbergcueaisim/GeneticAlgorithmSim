@@ -116,15 +116,26 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 void APopulationActor::geneticAlgorithm()
 {
 	while (!stop) {
-		//need a way to ensure that the fitness of each pawn has been calculated
-		// no idea what's going on here and it breaks compile
-		// Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
-        int n = sizeof(TArray<AProtoPawn*>)/sizeof(TArray<AProtoPawn*>[0]);
-        sort(TArray<AProtoPawn*>, 0, n-1);
-        
-		eliminate();
-		reproduce(Population);
+		if (fitnessesSet()) { 
+			sort(TArray<AProtoPawn*>, 0, currentSize-1);
+			//need a way to ensure that the fitness of each pawn has been calculated (this does it)
+			// no idea what's going on here and it breaks compile
+			// Population.Sort([](const AProtoPawn& left, const AProtoPawn right) {return left.fitness > right.fitness; });
+			eliminate();
+			reproduce(Population);
+		}
 	}
+}
+
+// checks if all of the pawns have had their fitness's set
+bool APopulationActor::fitnessesSet()
+{
+	for (int i = 0; i < curentSize; i++) {
+		if (!Population[i]->isFinished) {
+			return false;
+		}
+	}
+	return true;
 }
 
 // gets an index for a parent
