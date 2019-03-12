@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "CoreMinimal.h" 
 #include "GameFramework/Actor.h"
 #include "ProtoPawn.h"
 #include <cstdlib>
@@ -106,4 +106,18 @@ public:
 	// gets an index for a parent
 	UFUNCTION(BlueprintCallable, Category = "Protolith")
 		int getIndex();
+    
+    // swap function
+    UFUNCTION(BlueprintCallable)
+        void swap(int a, int b);
+    
+    // partition for quicksort
+    UFUNCTION(BlueprintCallable)
+        int partition(int low, int high);
+    
+    // sorting function
+    UFUNCTION(BlueprintCallable)
+        void sort(int low, int high);
+    
+    
 };
