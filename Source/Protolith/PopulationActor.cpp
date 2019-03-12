@@ -153,11 +153,13 @@ int APopulationActor::getIndex()
 }
 
 // swap function for quicksort
-void APopulationActor::swap(AProtoPawn* a, AProtoPawn* b)
+void APopulationActor::swap(int a, int b)
 {
-    AProtoPawn* t = a;
-    a = b;
-    b = t;
+    
+    AProtoPawn* temp = Population[a];
+    Population[a] = Population[b];
+    Population[b] = temp;
+    
 }
 
 // ********should be comparing their fitness, not value of protopawn
@@ -173,10 +175,10 @@ int APopulationActor::partition(int low, int high)
         if (Population[j]->fitness <= pivot)
         {
             i++; // increment index of smaller element
-            swap(Population[i], Population[j]);
+            swap(i, j);
         }
     }
-    swap(Population[i + 1], Population[high]);
+    swap(i + 1, high);
     return (i + 1);
 }
 

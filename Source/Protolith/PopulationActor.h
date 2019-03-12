@@ -107,7 +107,7 @@ public:
     
     // swap function
     UFUNCTION(BlueprintCallable)
-        void swap(AProtoPawn* a, AProtoPawn* b);
+        void swap(int a, int b);
     
     // partition for quicksort
     UFUNCTION(BlueprintCallable)
@@ -115,7 +115,7 @@ public:
     
     // sorting function
     UFUNCTION(BlueprintCallable)
-    void sort(int low, int high);
+        void sort(int low, int high);
     
     
 };
