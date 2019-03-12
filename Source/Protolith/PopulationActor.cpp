@@ -67,7 +67,7 @@ void APopulationActor::EvaluateFitness(TArray<AProtoPawn*> Pop)
 void APopulationActor::eliminate()
 {
 	TArray<AProtoPawn*> remainingPopulation = TArray<AProtoPawn*>();
-	int newPopulationSize = initialSize * recuringPopulation;
+	int newPopulationSize = currentSize * recuringPopulation;
 	for (int i = 0; i < initialSize; i++) {
 		if (i < newPopulationSize)
 		{

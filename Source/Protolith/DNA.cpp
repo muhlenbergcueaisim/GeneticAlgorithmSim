@@ -9,7 +9,8 @@ UDNA::UDNA()
 	// off to improve performance if you don't need them.
 	//InitializeComponent();
 	PrimaryComponentTick.bCanEverTick = true;	
-	//Genes.Add(Gene);
+	
+	//Genes.Add(rand() % 91);
 
 }
 
@@ -21,8 +22,9 @@ void UDNA::BeginPlay()
 
 	// ...
 	NumberOfGenes = 1;
-	for (int i = 0; i <= NumberOfGenes; i++)
+	for (int i = 0; i < NumberOfGenes; i++)
 	{
+		Genes.Add(rand() % 91);
 		//UStruct newGene;
 		//Genes[i] = &newGene;
 		//Genes[i]->floatValue = 0;
@@ -104,6 +106,7 @@ UDNA *UDNA::Cross(UDNA* DNA, UDNA* parent0, UDNA* parent1)
 	}
 	for (int i = minLen; i < maxLen; i++) {
 		if (rand() % 2 == 0) { //added
+			
 			DNA->Genes.Emplace(longParent->Genes[i]); //added
 			geneCount++; //added
 		} //added

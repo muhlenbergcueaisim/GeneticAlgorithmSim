@@ -29,11 +29,11 @@ public:
 
 	// an array of our genes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		TArray<int> Genes;
+	TArray<int> Genes;
 
 	// an individual gene struct
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		//UStruct* Gene;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
+	UStruct* Gene;
 
 	// number of genes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
