@@ -83,7 +83,7 @@ void APopulationActor::reproduce(TArray<AProtoPawn*> pop)
 		if (twoParents) {
 			do {
 				parent1 = getIndex();
-			} while (parent0 == parent1)
+            } while (parent0 == parent1);
 		}
 		else {
 			parent1 = getIndex();
@@ -130,7 +130,7 @@ void APopulationActor::geneticAlgorithm()
 // checks if all of the pawns have had their fitness's set
 bool APopulationActor::fitnessesSet()
 {
-	for (int i = 0; i < curentSize; i++) {
+	for (int i = 0; i < currentSize; i++) {
 		if (!Population[i]->isFinished) {
 			return false;
 		}
@@ -161,7 +161,7 @@ void APopulationActor::swap(AProtoPawn* a, AProtoPawn* b)
 }
 
 // ********should be comparing their fitness, not value of protopawn
-AProtoPawn partition(int low, int high)
+int APopulationActor::partition(int low, int high)
 {
     int pivot = Population[high]->fitness; // pivot
     int i = (low - 1); // Index of smaller element
@@ -173,10 +173,10 @@ AProtoPawn partition(int low, int high)
         if (Population[j]->fitness <= pivot)
         {
             i++; // increment index of smaller element
-            swap(&Population[i], &Population[j]);
+            swap(Population[i], Population[j]);
         }
     }
-    swap(&Population[i + 1], &Population[high]);
+    swap(Population[i + 1], Population[high]);
     return (i + 1);
 }
 

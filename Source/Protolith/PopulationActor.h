@@ -104,4 +104,18 @@ public:
 	// gets an index for a parent
 	UFUNCTION(BlueprintCallable)
 		int getIndex();
+    
+    // swap function
+    UFUNCTION(BlueprintCallable)
+        void swap(AProtoPawn* a, AProtoPawn* b);
+    
+    // partition for quicksort
+    UFUNCTION(BlueprintCallable)
+        int partition(int low, int high);
+    
+    // sorting function
+    UFUNCTION(BlueprintCallable)
+    void sort(int low, int high);
+    
+    
 };
