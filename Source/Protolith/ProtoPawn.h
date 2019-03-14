@@ -32,28 +32,29 @@ public:
 
 	// this pawn's DNA object
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		UDNA* DNA;
+	UDNA* DNA;
 
 	// this is the pawn's fintess score
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		float fitness;
+	float fitness;
 
 	// has the pawn finished its fitness function?
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		bool isFinished;
+	bool isFinished;
+
 	/*
 	*	SCENE COMPONENTS
 	*/
 
 	// Root scene component
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		USceneComponent* Root;
+	USceneComponent* Root;
 
 	// the blueprint component to represent pointing direction
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		UArrowComponent* MyArrowComponent;
+	UArrowComponent* MyArrowComponent;
 
 	// blueprint component for the box component
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Protolith")
-		UBoxComponent* MyBoxComponent;
+	UBoxComponent* MyBoxComponent;
 };
