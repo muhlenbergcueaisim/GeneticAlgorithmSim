@@ -87,7 +87,7 @@ void APopulationActor::Reproduce(TArray<AProtoPawn*> pop, TArray<FTransform> new
 	int parent0, parent1;
 
 	TArray<AProtoPawn*> nextGeneration;
-	//UDNA newDNA;// = UDNA::UDNA();
+
 	int nextGenSize = initialSize - currentSize;
 	for (int i = 0; i < nextGenSize; i++) {
 		AProtoPawn* newPawn = GetWorld()->SpawnActor<AProtoPawn>(PawnType, newTransforms[i]);
@@ -105,32 +105,10 @@ void APopulationActor::Reproduce(TArray<AProtoPawn*> pop, TArray<FTransform> new
 		UE_LOG(LogTemp, Warning, TEXT("parent 0: %d \n parent 1: %d\n"), parent0, parent1);
 
 		newPawn->DNA->Cross(newPawn->DNA, Population[parent0]->DNA, Population[parent1]->DNA);
-		
-		nextGeneration.Add(newPawn);
-		currentSize++;
-
-		//parent0 = 0;
-		//rand() % Population.Num();
-		//parent1 = 1;
-		//rand() % Population.Num();
-		//newDNA = UDNA::Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-
-		//newPawn->DNA->Cross(newPawn->DNA, Population[parent0]->DNA, Population[0]->DNA);
-
-		//newDNA.Cross(Population[parent0]->DNA, Population[parent1]->DNA);
-
 		//newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
 
-		//newPawn.DNA = &newDNA;
-
-		/*
-		if (currentSize < initialSize) {
-			//newPawn.DNA = &newDNA;
-			//newPawn.DNA->Mutate(&newDNA, mutateChance, maxMutateChange);
-			nextGeneration.Emplace(newPawn);
-			currentSize++;
-		}
-		*/
+		nextGeneration.Add(newPawn);
+		currentSize++;
 	}
 	Population.Append(nextGeneration);
 }
