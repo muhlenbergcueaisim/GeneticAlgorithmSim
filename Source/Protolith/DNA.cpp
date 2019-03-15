@@ -84,25 +84,25 @@ UDNA *UDNA::Cross(UDNA* DNA, UDNA* parent0, UDNA* parent1)
 	geneCount = minLen;
 
 	for (int i = 0; i < minLen; i++) {
-		//TODO change 32
 		randomNum = rand() % MaxCrossPoint + 1;
+
 		UE_LOG(LogTemp, Warning, TEXT("Crossing Point: %d"), randomNum);
 		mask0 = 0;
 		mask1 = 0;
+
 		for (int maskI = 32; maskI > 0; maskI--) {
 			if (maskI > randomNum) {
-				mask0 = (mask0 | 1) << 1;
+				mask0 = (mask0 << 1) | 1;
 			}
 			else {
-				mask1 = (mask1 | 1) << 1;
+				mask1 = (mask1 << 1) | 1;
 			}
 		}
+
+		mask0 = mask0 << randomNum;
 		UE_LOG(LogTemp, Warning, TEXT("mask0: %x"), mask0);
 		UE_LOG(LogTemp, Warning, TEXT("mask1: %x"), mask1);
 
-
-
-		mask0 = mask0 << randomNum;
 		DNA->Genes.Emplace((parent0->Genes[i] & mask0) | (parent1->Genes[i] & mask1));
 		UE_LOG(LogTemp, Warning, TEXT("Gene contains: %d"), DNA->Genes[0]);
 	}
