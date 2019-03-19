@@ -10,8 +10,6 @@ UDNA::UDNA()
 	// off to improve performance if you don't need them.
 	//InitializeComponent();
 	PrimaryComponentTick.bCanEverTick = true;	
-	
-	//Genes.Add(rand() % 91);
 
 }
 
@@ -20,18 +18,11 @@ UDNA::UDNA()
 void UDNA::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// ...
 	NumberOfGenes = 1;
 	for (int i = 0; i < NumberOfGenes; i++)
 	{
 		Genes.Add(rand() % 91);
-		//UStruct newGene;
-		//Genes[i] = &newGene;
-		//Genes[i]->floatValue = 0;
 	}
-	// ...
-	
 }
 
 // Called every frame
