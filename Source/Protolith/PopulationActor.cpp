@@ -105,7 +105,7 @@ void APopulationActor::Reproduce(TArray<AProtoPawn*> pop, TArray<FTransform> new
 		UE_LOG(LogTemp, Warning, TEXT("parent 0: %d \n parent 1: %d\n"), parent0, parent1);
 
 		newPawn->DNA->Cross(newPawn->DNA, Population[parent0]->DNA, Population[parent1]->DNA);
-		newPawn->DNA->Mutate(newPawn->DNA, mutateChance, maxMutateChange);
+		newPawn->DNA->Mutate(newPawn->DNA, mutateChance * 100, maxMutateChange);
 
 		nextGeneration.Add(newPawn);
 		currentSize++;
