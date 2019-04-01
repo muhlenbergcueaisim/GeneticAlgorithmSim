@@ -173,7 +173,7 @@ int APopulationActor::partition(int low, int high)
     {
         // If current element is smaller than or
         // equal to pivot
-        if (Population[j]->fitness <= pivot)
+        if (Population[j]->fitness >= pivot)
         {
             i++; // increment index of smaller element
             swap(i, j);
