@@ -57,7 +57,7 @@ UDNA *UDNA::Cross(UDNA* DNA, UDNA* parent0, UDNA* parent1)
 {
 	int mask0, mask1, randomNum, minLen, maxLen;
 	int geneCount;
-	int MaxCrossPoint = 8;
+	int MaxCrossPoint = 17;
 
 	UDNA* longParent;
 	DNA->Genes.Empty();
