@@ -18,11 +18,6 @@ UDNA::UDNA()
 void UDNA::BeginPlay()
 {
 	Super::BeginPlay();
-	NumberOfGenes = 1;
-	for (int i = 0; i < NumberOfGenes; i++)
-	{
-		Genes.Add(rand() % 91);
-	}
 }
 
 // Called every frame
