@@ -53,7 +53,7 @@ public:
 
 	// the probability of mutation happening
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "0.0", UIMax = "1.0"))
-		float mutateChance = 0.2;
+		float mutateChance = 0.0;
 
 	// the largest effect that mutation could have
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (UIMin = "1"))
