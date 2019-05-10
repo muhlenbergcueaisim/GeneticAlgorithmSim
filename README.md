@@ -13,8 +13,11 @@ Executable (independent game) instructions:
 Opening and Running code package instructions:
 
   1. Must download:
+  
     - Visual Studio: https://visualstudio.microsoft.com/downloads/
+    
     - Epic Games Launcher: https://www.epicgames.com/unrealtournament/download
+    
     - Unreal Enginge 4: - open Epic Games Launcher, click the yellow "Download Unreal Engine" button in the top right-hand corner
     
    2. Download the zip from github, unzip
